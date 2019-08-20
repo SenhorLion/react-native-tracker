@@ -9,5 +9,7 @@ Record a users movement to create 'tracks' of walks, runs or bike rides.
   - Record track
   - Save track
   - Display list of recorded tracks
-- Express API with MongoDB to store saved data.
-  - User authentication: sign up, Sign in
+  - Display real time tracker on map
+- Express API with MongoDB:
+  - User authentication: Sign up, Sign in
+  - JWT to provide token access
