@@ -1,11 +1,12 @@
-// import all mongoose Models
 require('./env');
+// import all mongoose Models first
 require('./models/User');
 
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoute');
+const requireAuth = require('./middlewares/requireAuth');
 
 const app = express();
 
@@ -13,9 +14,7 @@ app.use(bodyParser.json());
 app.use(authRoutes);
 
 // TODO: Use .env to store user | password
-const mongoUri = `mongodb+srv://${process.env.MONGO_USER}:${
-  process.env.MONGO_PASSWORD
-}@cluster0-tc3vy.mongodb.net/test?retryWrites=true&w=majority`;
+const mongoUri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-tc3vy.mongodb.net/test?retryWrites=true&w=majority`;
 
 mongoose.connect(mongoUri, {
   useCreateIndex: true,
@@ -30,8 +29,8 @@ mongoose.connection.on('error', error => {
   console.error('Error Connecting to Mongoose', error);
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello');
+app.get('/', requireAuth, (req, res) => {
+  res.send(`Hello, you are authed! Your email is ${req.user.email}`);
 });
 
 app.listen(3000, () => {
