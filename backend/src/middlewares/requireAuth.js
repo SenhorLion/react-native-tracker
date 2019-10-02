@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
 const ERROR_LOGIN = `You need to be logged in to access this route.`;
+
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
   // authorization = 'Bearer 123token';
