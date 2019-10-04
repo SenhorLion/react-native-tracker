@@ -1,0 +1,16 @@
+{
+    "name": "Lion's Second Track",
+    "locations": [
+        {
+            "timestamp": 120000000,
+            "coords": {
+                "latitude": 200,
+                "longitude": 100,
+                "altitude": 500,
+                "accuracy": 10,
+                "heading": 100,
+                "speed": 500
+            }
+        }
+    ]
+}
