@@ -17,7 +17,18 @@ app.use(authRoutes);
 app.use(trackRoutes);
 
 // TODO: Use .env to store user | password
-const mongoUri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-tc3vy.mongodb.net/test?retryWrites=true&w=majority`;
+
+
+
+let mongoUri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-tc3vy.mongodb.net/test?retryWrites=true&w=majority`;
+
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+console.log('process.env.NODE_ENV', process.env.NODE_ENV === 'production');
+
+if (process.env.NODE_ENV !== 'production') {
+  mongoUri = process.env.MONGO_URL;
+} 
+
 
 mongoose.connect(mongoUri, {
   useCreateIndex: true,
@@ -36,6 +47,6 @@ app.get('/', requireAuth, (req, res) => {
   res.send(`Hello, you are authed! Your email is ${req.user.email}`);
 });
 
-app.listen(3000, () => {
-  console.log('Listening on PORT 3000');
+app.listen(3003, () => {
+  console.log('Listening on PORT 3003');
 });
