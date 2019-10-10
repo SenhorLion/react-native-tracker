@@ -20,10 +20,26 @@ module.exports = (req, res, next) => {
       return res.status(401).send({ error: ERROR_LOGIN });
     }
 
-    const { userId } = payload;
+    try {
+      const { userId } = payload;
 
-    const user = await User.findById(userId);
-    req.user = user;
-    next();
+      const user = await User.findById(userId);
+
+      if (!user) {
+        console.log('@auth', user);
+        return res.status(401).send({ error: ERROR_LOGIN });
+      }
+
+      req.user = user;
+
+      console.log('@auth', user);
+
+      // TODO: When / If user is null throw error
+      next();
+    } catch (error) {
+      return res
+        .status(422)
+        .send({ error: 'There was an error finding your credentials' });
+    }
   });
 };

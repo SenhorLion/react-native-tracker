@@ -18,8 +18,6 @@ app.use(trackRoutes);
 
 // TODO: Use .env to store user | password
 
-
-
 let mongoUri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-tc3vy.mongodb.net/test?retryWrites=true&w=majority`;
 
 console.log('process.env.NODE_ENV', process.env.NODE_ENV);
@@ -27,8 +25,7 @@ console.log('process.env.NODE_ENV', process.env.NODE_ENV === 'production');
 
 if (process.env.NODE_ENV !== 'production') {
   mongoUri = process.env.MONGO_URL;
-} 
-
+}
 
 mongoose.connect(mongoUri, {
   useCreateIndex: true,
@@ -44,6 +41,7 @@ mongoose.connection.on('error', error => {
 });
 
 app.get('/', requireAuth, (req, res) => {
+  console.log('email', req.user.email);
   res.send(`Hello, you are authed! Your email is ${req.user.email}`);
 });
 
