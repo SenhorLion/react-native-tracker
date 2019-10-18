@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, StyleSheet, SafeAreaView } from 'react-native';
 import { Text, Input, Button } from 'react-native-elements';
+import { Context as AuthContext } from '../context/AuthContext';
 import Spacer from '../utils/Spacer';
 import { IconButton } from '../components/Buttons';
+import { ErrorMessage } from '../components/Errors';
 
 const SignupScreen = ({ navigation }) => {
+  const { state, signup } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const passwordIcon = showPassword ? 'eye' : 'eye-slash';
-
-  console.log('@showPassword', showPassword);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,9 +44,15 @@ const SignupScreen = ({ navigation }) => {
             />
           }></Input>
 
+        {state.errorMessage ? (
+          <ErrorMessage message={state.errorMessage} />
+        ) : null}
         <Spacer />
 
-        <Button style={styles.buttonSignup} title="Sign Up"></Button>
+        <Button
+          style={styles.buttonSignup}
+          title="Sign Up"
+          onPress={() => signup({ email, password })}></Button>
       </View>
 
       <View style={[styles.item, { flex: 2 }]}></View>
