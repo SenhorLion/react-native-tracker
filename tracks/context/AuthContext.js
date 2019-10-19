@@ -1,6 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import createDataContext from './createDataContext';
 import trackerAPI from '../api/tracker';
+import {navigate} from '../navigator/navigationService'
 
 const ACTIONS = {
   ADD_ERROR: 'ADD_ERROR',
@@ -13,7 +14,7 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: action.payload };
 
     case ACTIONS.ON_SIGNUP:
-      return { errorMessage: '', token: action.payload };
+      return { isSignedIn: true, errorMessage: '', token: action.payload };
 
     default:
       return state;
@@ -31,6 +32,7 @@ const signup = dispatch => async ({ email, password }) => {
     dispatch({ type: ACTIONS.ON_SIGNUP, payload: res.data.token });
 
     // TODO: navigate to main flow
+    navigate('TrackList');
   } catch (error) {
     dispatch({
       type: ACTIONS.ADD_ERROR,
@@ -55,5 +57,5 @@ const signout = dispatch => {
 export const { Provider, Context } = createDataContext(
   authReducer,
   { signin, signout, signup },
-  { token: null, errorMessage: '' }
+  { isSignedIn: false, token: null, errorMessage: '' }
 );

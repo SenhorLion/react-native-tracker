@@ -6,4 +6,8 @@ export default StyleSheet.create({
     marginRight: 10,
     marginLeft: 0,
   },
+  textButtonContainer: {
+    alignItems: 'flex-start',
+    marginTop: 20
+  },
 });
