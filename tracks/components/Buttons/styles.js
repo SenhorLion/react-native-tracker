@@ -8,6 +8,9 @@ export default StyleSheet.create({
   },
   textButtonContainer: {
     alignItems: 'flex-start',
-    marginTop: 20
+    marginTop: 10,
+    padding: 10,
   },
+
+  navButtonContainer: {},
 });

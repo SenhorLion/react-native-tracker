@@ -12,6 +12,12 @@ const TrackListScreen = ({ navigation }) => {
   );
 };
 
+TrackListScreen.navigationOptions = () => {
+  return {
+    header: null,
+  };
+};
+
 const styles = StyleSheet.create({});
 
 export default TrackListScreen;
