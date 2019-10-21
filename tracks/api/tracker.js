@@ -1,7 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
-const BASE_URL = 'http://cc150056.ngrok.io';
+// NB: For local testing, use ngrok if connecting to a device
+const BASE_URL = "http://localhost:3003";
 
 export default axios.create({
-  baseURL: BASE_URL,
+  baseURL: BASE_URL
 });

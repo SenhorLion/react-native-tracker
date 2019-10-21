@@ -1,15 +1,15 @@
-require('../env');
-const express = require('express');
-const mongoose = require('mongoose');
-const requireAuth = require('../middlewares/requireAuth');
+require("../env");
+const express = require("express");
+const mongoose = require("mongoose");
+const requireAuth = require("../middlewares/requireAuth");
 
-const Track = mongoose.model('Track');
+const Track = mongoose.model("Track");
 
 const router = express.Router();
 
 router.use(requireAuth);
 
-router.get('/tracks', async (req, res) => {
+router.get("/tracks", async (req, res) => {
   // get all tracks
   try {
     const tracks = await Track.find({ userId: req.user._id });
@@ -20,14 +20,14 @@ router.get('/tracks', async (req, res) => {
   }
 });
 
-router.post('/tracks', async (req, res) => {
+router.post("/tracks", async (req, res) => {
   // create a track
   const { name, locations } = req.body;
 
   if (!name || !locations) {
     return res
       .status(422)
-      .send({ error: 'You must provide name and locations' });
+      .send({ error: "You must provide name and locations" });
   }
 
   try {

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text, Input, Button } from 'react-native-elements';
-import { IconButton, TextButton } from '../Buttons';
-import { ErrorMessage } from '../Errors';
-import Spacer from '../../utils/Spacer';
+import React, { useState } from "react";
+import { View, StyleSheet } from "react-native";
+import { Text, Input, Button } from "react-native-elements";
+import { IconButton } from "../Buttons";
+import { ErrorMessage } from "../Errors";
+import Spacer from "../../utils/Spacer";
 
 const styles = StyleSheet.create({
   container: {
@@ -12,30 +12,30 @@ const styles = StyleSheet.create({
     marginTop: 40,
     // alignContent: 'center',
     borderWidth: 0,
-    borderColor: '#00ff00',
+    borderColor: "#00ff00"
   },
   item: {
     // flex: 1,
     padding: 10,
-    borderColor: '#f0f',
-    borderWidth: 0,
+    borderColor: "#f0f",
+    borderWidth: 0
   },
   title: {
-    alignSelf: 'center',
-    justifyContent: 'center',
+    alignSelf: "center",
+    justifyContent: "center"
   },
   buttonSignup: {
     marginTop: 20,
-    width: 200,
-  },
+    width: 200
+  }
 });
 
 const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const passwordIcon = showPassword ? 'eye-slash' : 'eye';
+  const passwordIcon = showPassword ? "eye-slash" : "eye";
 
   return (
     <View style={[styles.container]}>
@@ -48,7 +48,8 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
           value={email}
           onChangeText={setEmail}
           autoCapitalize="none"
-          autoCorrect={false}></Input>
+          autoCorrect={false}
+        ></Input>
         <Spacer />
 
         <Input
@@ -65,14 +66,16 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
               color="#000"
               onPress={() => setShowPassword(!showPassword)}
             />
-          }></Input>
+          }
+        ></Input>
 
         {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
 
         <Button
           style={styles.buttonSignup}
           title={submitButtonText}
-          onPress={() => onSubmit({ email, password })}></Button>
+          onPress={() => onSubmit({ email, password })}
+        ></Button>
       </View>
     </View>
   );

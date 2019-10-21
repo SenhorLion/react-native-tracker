@@ -1,16 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   iconButtonContainer: {
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
     marginRight: 10,
-    marginLeft: 0,
+    marginLeft: 0
   },
   textButtonContainer: {
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
     marginTop: 10,
-    padding: 10,
+    padding: 10
   },
 
-  navButtonContainer: {},
+  navButtonContainer: {}
 });

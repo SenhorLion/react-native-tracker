@@ -1,15 +1,15 @@
-require('../env');
-const express = require('express');
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
+require("../env");
+const express = require("express");
+const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 
-const User = mongoose.model('User');
+const User = mongoose.model("User");
 const router = express.Router();
 
-router.post('/signup', async (req, res) => {
+router.post("/signup", async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log({ email, password });
+    console.log("@signup", { email, password });
 
     const user = new User({ email, password });
     await user.save();
@@ -22,28 +22,31 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-router.post('/signin', async (req, res) => {
-  const {email, password} = req.body;
+router.post("/signin", async (req, res) => {
+  const { email, password } = req.body;
+  console.log("@signin", { email, password });
 
-  if(!email || !password) {
-    return res.status(422).send({error: 'Must provide email and password'});
+  if (!email || !password) {
+    return res.status(422).send({ error: "Must provide email and password" });
   }
-  
-  const user = await User.findOne({email});
-  
-  if(!user){
-    return res.status(422).send({error: 'Invalid credentials.'});
+
+  const user = await User.findOne({ email });
+
+  console.log("@user", { user });
+
+  if (!user) {
+    return res.status(422).send({ error: "Invalid credentials." });
   }
-  
+
   try {
     await user.comparePassword(password);
 
     const token = jwt.sign({ userId: user._id }, process.env.SECRET_SIGN_KEY);
+    console.log("@user token", { token });
 
     res.send({ token });
-
   } catch (error) {
-    return res.status(422).send({error: 'Invalid credentials.'});
+    return res.status(422).send({ error: "Invalid credentials." });
   }
-})
+});
 module.exports = router;
