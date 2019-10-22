@@ -8,7 +8,7 @@ import { NavButton } from "../components/Buttons";
 // const token =  await AsyncStorage.getItem('token');
 // console.log('my user token', token)
 
-const TrackListScreen = async ({ navigation }) => {
+const TrackListScreen = ({ navigation }) => {
   return (
     <SafeAreaView>
       <Text h1>TrackList Screen</Text>

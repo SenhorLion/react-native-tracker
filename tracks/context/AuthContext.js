@@ -7,6 +7,7 @@ const ACTIONS = {
   ADD_ERROR: "ADD_ERROR",
   ON_SIGNUP: "ON_SIGNUP",
   ON_SIGNIN: "ON_SIGNIN",
+  ON_SIGNOUT: "ON_SIGNOUT",
   CLEAR_ERROR_MESSAGES: "CLEAR_ERROR_MESSAGES"
 };
 
@@ -27,6 +28,10 @@ const authReducer = (state, action) => {
         errorMessage: "",
         token: action.payload
       };
+
+    case ACTIONS.ON_SIGNOUT: {
+      return { token: null, errorMessage: "" };
+    }
 
     default:
       return state;
@@ -84,18 +89,16 @@ const tokenSignin = dispatch => async () => {
 
   if (token) {
     dispatch({ type: ACTIONS.ON_SIGNIN, payload: token });
-    // TODO: navigate to main flow
     navigate("TrackList");
   } else {
-    // TODO: navigate to main flow
     navigate("loginFlow");
   }
 };
 
-const signout = dispatch => {
-  return () => {
-    // do signout stuff
-  };
+const signout = dispatch => async () => {
+  await AsyncStorage.removeItem("token");
+  dispatch({ type: ACTIONS.ON_SIGNOUT });
+  navigate("loginFlow");
 };
 
 const clearErrorMessages = dispatch => () =>
