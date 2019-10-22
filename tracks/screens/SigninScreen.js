@@ -5,12 +5,14 @@ import { Context as AuthContext } from "../context/AuthContext";
 import { AuthForm } from "../components/forms";
 import Spacer from "../utils/Spacer";
 import { NavButton } from "../components/Buttons";
+import { NavigationEvents } from "react-navigation";
 
 const SigninScreen = ({ navigation }) => {
-  const { state, signin } = useContext(AuthContext);
+  const { state, signin, clearErrorMessages } = useContext(AuthContext);
 
   return (
     <SafeAreaView style={styles.container}>
+      <NavigationEvents onWillBlur={clearErrorMessages}></NavigationEvents>
       <AuthForm
         headerText="Sign In for Tracker"
         errorMessage={state.errorMessage}

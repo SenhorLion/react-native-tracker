@@ -6,7 +6,8 @@ import { navigate } from "../navigator/navigationService";
 const ACTIONS = {
   ADD_ERROR: "ADD_ERROR",
   ON_SIGNUP: "ON_SIGNUP",
-  ON_SIGNIN: "ON_SIGNIN"
+  ON_SIGNIN: "ON_SIGNIN",
+  CLEAR_ERROR_MESSAGES: "CLEAR_ERROR_MESSAGES"
 };
 
 const authReducer = (state, action) => {
@@ -17,10 +18,13 @@ const authReducer = (state, action) => {
     case ACTIONS.ON_SIGNUP:
       return { isSignedIn: true, errorMessage: "", token: action.payload };
 
+    case ACTIONS.CLEAR_ERROR_MESSAGES:
+      return { ...state, errorMessage: "" };
+
     case ACTIONS.ON_SIGNIN:
       return {
         isSignedIn: true,
-        errorMessage: "test signed in",
+        errorMessage: "",
         token: action.payload
       };
 
@@ -75,14 +79,30 @@ const signin = dispatch => {
   };
 };
 
+const tokenSignin = dispatch => async () => {
+  const token = await AsyncStorage.getItem("token");
+
+  if (token) {
+    dispatch({ type: ACTIONS.ON_SIGNIN, payload: token });
+    // TODO: navigate to main flow
+    navigate("TrackList");
+  } else {
+    // TODO: navigate to main flow
+    navigate("loginFlow");
+  }
+};
+
 const signout = dispatch => {
   return () => {
     // do signout stuff
   };
 };
 
+const clearErrorMessages = dispatch => () =>
+  dispatch({ type: ACTIONS.CLEAR_ERROR_MESSAGES });
+
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin, signout, signup },
+  { signin, signout, signup, clearErrorMessages, tokenSignin },
   { isSignedIn: false, token: null, errorMessage: "" }
 );
