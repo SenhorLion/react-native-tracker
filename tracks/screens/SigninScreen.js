@@ -6,12 +6,13 @@ import { AuthForm } from "../components/forms";
 import Spacer from "../utils/Spacer";
 import { NavButton } from "../components/Buttons";
 import { NavigationEvents } from "react-navigation";
+import { Container } from "../components/container";
 
 const SigninScreen = ({ navigation }) => {
   const { state, signin, clearErrorMessages } = useContext(AuthContext);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
       <NavigationEvents onWillBlur={clearErrorMessages}></NavigationEvents>
       <AuthForm
         headerText="Sign In for Tracker"
@@ -26,7 +27,7 @@ const SigninScreen = ({ navigation }) => {
           size={24}
         ></NavButton>
       </Spacer>
-    </SafeAreaView>
+    </Container>
   );
 };
 

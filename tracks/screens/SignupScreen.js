@@ -6,12 +6,13 @@ import { Context as AuthContext } from "../context/AuthContext";
 import { AuthForm } from "../components/forms";
 import Spacer from "../utils/Spacer";
 import { NavButton } from "../components/Buttons";
+import { Container } from "../components/container";
 
 const SignupScreen = ({ navigation }) => {
   const { state, signup, clearErrorMessages } = useContext(AuthContext);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
       <NavigationEvents onWillBlur={clearErrorMessages}></NavigationEvents>
       <AuthForm
         headerText="Sign Up for Tracker"
@@ -26,7 +27,7 @@ const SignupScreen = ({ navigation }) => {
           size={24}
         ></NavButton>
       </Spacer>
-    </SafeAreaView>
+    </Container>
   );
 };
 
