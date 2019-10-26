@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
 import { watchPositionAsync, Accuracy } from "expo-location";
 import * as Permissions from "expo-permissions";
 
+import { Context as LocationContext } from "../context/LocationContext";
 import Spacer from "../utils/Spacer";
 import { Map } from "../components/Map";
 import { Container } from "../components/container";
@@ -11,6 +12,8 @@ import { ErrorMessage } from "../components/Errors";
 
 const TrackCreateScreen = () => {
   const [errorMessage, setErrorMessage] = useState(null);
+  const { addLocation } = useContext(LocationContext);
+
   const startTracking = async () => {
     try {
       let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -29,7 +32,8 @@ const TrackCreateScreen = () => {
           distanceInterval: 10
         },
         location => {
-          console.log({ location });
+          // console.log({ location });
+          addLocation(location);
         }
       );
     } catch (err) {

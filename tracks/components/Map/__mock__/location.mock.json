@@ -1,0 +1,16 @@
+{
+  "currentLocation": Object {
+    "coords": Object {
+      "accuracy": 5,
+      "altitude": 0,
+      "altitudeAccuracy": -1,
+      "heading": 63.85,
+      "latitude": 37.33033564,
+      "longitude": -122.03099473,
+      "speed": 8.15,
+    },
+    "timestamp": 1572100262091.4111,
+  },
+  "locations": Array [],
+  "recording": false,
+},
