@@ -2,7 +2,11 @@ import React from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 
 const Container = ({ children }) => {
-  return <SafeAreaView style={styles.container}>{children}</SafeAreaView>;
+  return (
+    <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
+      {children}
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, AsyncStorage } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
 import { NavButton } from "../components/Buttons";
 import { Container } from "../components/container";
@@ -12,7 +12,9 @@ import { Container } from "../components/container";
 const TrackListScreen = ({ navigation }) => {
   return (
     <Container>
-      <Text h1>TrackList Screen</Text>
+      <View style={[styles.item, styles.title]}>
+        <Text h1>Track List</Text>
+      </View>
 
       <NavButton text="Track Detail" routeName="TrackDetail" size={24} />
     </Container>
@@ -25,6 +27,16 @@ TrackListScreen.navigationOptions = () => {
   };
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  item: {
+    padding: 10,
+    borderColor: "#f0f",
+    borderWidth: 0
+  },
+  title: {
+    alignSelf: "center",
+    justifyContent: "center"
+  }
+});
 
 export default TrackListScreen;
