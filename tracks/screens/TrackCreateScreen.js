@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
-import { requestPermissionsAsync } from "expo-location";
+import { watchPositionAsync, Accuracy } from "expo-location";
 import * as Permissions from "expo-permissions";
 
 import Spacer from "../utils/Spacer";
@@ -15,11 +15,23 @@ const TrackCreateScreen = () => {
     try {
       let { status } = await Permissions.askAsync(Permissions.LOCATION);
 
-      console.log("@status", status);
+      // status: granted | denied
 
       if (status !== "granted") {
         setErrorMessage("Permission to access location was denied");
       }
+
+      // otherwise, all rosey permissions granted so start tracking...
+      await watchPositionAsync(
+        {
+          accuracy: Accuracy.BestForNavigation,
+          timeInterval: 1000,
+          distanceInterval: 10
+        },
+        location => {
+          console.log({ location });
+        }
+      );
     } catch (err) {
       setErrorMessage(err);
     }
