@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { Text } from "react-native-elements";
 import { watchPositionAsync, Accuracy } from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -9,6 +9,7 @@ import Spacer from "../utils/Spacer";
 import { Map } from "../components/Map";
 import { Container } from "../components/container";
 import { ErrorMessage } from "../components/Errors";
+import screenStyles from "./styles";
 
 const TrackCreateScreen = () => {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -47,7 +48,7 @@ const TrackCreateScreen = () => {
 
   return (
     <Container>
-      <View style={[styles.item, styles.title]}>
+      <View style={[screenStyles.item, screenStyles.title]}>
         <Text h1>Track Create</Text>
       </View>
       <Map></Map>
@@ -61,17 +62,5 @@ const TrackCreateScreen = () => {
     </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  item: {
-    padding: 10,
-    borderColor: "#f0f",
-    borderWidth: 0
-  },
-  title: {
-    alignSelf: "center",
-    justifyContent: "center"
-  }
-});
 
 export default TrackCreateScreen;

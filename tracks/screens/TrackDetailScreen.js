@@ -1,11 +1,15 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Text } from "react-native-elements";
 import { Container } from "../components/container";
+import screenStyles from "./styles";
 
 const TrackDetailScreen = () => {
   return (
     <Container>
-      <Text style={{ fontSize: 48 }}>TrackDetailScreen</Text>
+      <View style={[screenStyles.item, screenStyles.title]}>
+        <Text h1>Track Detail</Text>
+      </View>
     </Container>
   );
 };

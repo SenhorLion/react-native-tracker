@@ -71,6 +71,7 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
 
         {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
 
+        <Spacer />
         <Button
           style={styles.buttonSignup}
           title={submitButtonText}

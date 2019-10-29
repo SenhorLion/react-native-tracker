@@ -3,6 +3,7 @@ import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
 import { NavButton } from "../components/Buttons";
 import { Container } from "../components/container";
+import screenStyles from "./styles";
 
 // TODO: The token here (and logged)  causes a Invariant Violation: Objects are not valid as a React child (found: object with keys {_40, _65, _55, _72}).
 // If you meant to render a collection of children, use an array instead.
@@ -12,7 +13,7 @@ import { Container } from "../components/container";
 const TrackListScreen = ({ navigation }) => {
   return (
     <Container>
-      <View style={[styles.item, styles.title]}>
+      <View style={[screenStyles.item, screenStyles.title]}>
         <Text h1>Track List</Text>
       </View>
 
@@ -26,17 +27,5 @@ TrackListScreen.navigationOptions = () => {
     header: null
   };
 };
-
-const styles = StyleSheet.create({
-  item: {
-    padding: 10,
-    borderColor: "#f0f",
-    borderWidth: 0
-  },
-  title: {
-    alignSelf: "center",
-    justifyContent: "center"
-  }
-});
 
 export default TrackListScreen;
