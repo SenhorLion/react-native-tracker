@@ -2,6 +2,7 @@ import React, { useContext, useCallback } from "react";
 import { View } from "react-native";
 import { Text } from "react-native-elements";
 import { withNavigationFocus } from "react-navigation";
+import { FontAwesome } from "@expo/vector-icons";
 import useLocation from "../hooks/useLocation";
 import { Context as LocationContext } from "../context/LocationContext";
 import Spacer from "../utils/Spacer";
@@ -24,7 +25,7 @@ const TrackCreateScreen = ({ isFocused }) => {
   return (
     <Container>
       <View style={[screenStyles.item, screenStyles.title]}>
-        <Text h1>Track Create</Text>
+        <Text h1>Add Track</Text>
       </View>
       <Map></Map>
       {errorMessage ? (
@@ -38,6 +39,14 @@ const TrackCreateScreen = ({ isFocused }) => {
       <TrackForm></TrackForm>
     </Container>
   );
+};
+
+TrackCreateScreen.navigationOptions = () => {
+  return {
+    title: "Add Track",
+    tabBarIcon: <FontAwesome name="plus" size={20}></FontAwesome>
+    // header: null
+  };
 };
 
 export default withNavigationFocus(TrackCreateScreen);
