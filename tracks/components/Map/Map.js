@@ -6,10 +6,8 @@ import { Context as LocationContext } from "../../context/LocationContext";
 
 const Map = () => {
   const {
-    state: { currentLocation }
+    state: { currentLocation, locations }
   } = useContext(LocationContext);
-
-  console.log({ currentLocation });
 
   if (!currentLocation) {
     return (
@@ -36,10 +34,11 @@ const Map = () => {
     >
       <Circle
         center={currentLocation.coords}
-        radius={60}
+        radius={20}
         strokeColor="rgba(255,0,255, 1.0)"
         fillColor="rgba(255,158,255, 0.5)"
       ></Circle>
+      <Polyline coordinates={locations.map(loc => loc.coords)}></Polyline>
     </MapView>
   );
 };

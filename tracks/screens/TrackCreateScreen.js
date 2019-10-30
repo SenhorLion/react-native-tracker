@@ -1,50 +1,25 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext, useCallback } from "react";
 import { View } from "react-native";
 import { Text } from "react-native-elements";
-import { watchPositionAsync, Accuracy } from "expo-location";
-import * as Permissions from "expo-permissions";
-
+import { withNavigationFocus } from "react-navigation";
+import useLocation from "../hooks/useLocation";
 import { Context as LocationContext } from "../context/LocationContext";
 import Spacer from "../utils/Spacer";
 import { Map } from "../components/Map";
 import { Container } from "../components/container";
 import { ErrorMessage } from "../components/Errors";
+import { TrackForm } from "../components/forms";
 import screenStyles from "./styles";
 
-const TrackCreateScreen = () => {
-  const [errorMessage, setErrorMessage] = useState(null);
-  const { addLocation } = useContext(LocationContext);
-
-  const startTracking = async () => {
-    try {
-      let { status } = await Permissions.askAsync(Permissions.LOCATION);
-
-      // status: granted | denied
-
-      if (status !== "granted") {
-        setErrorMessage("Permission to access location was denied");
-      }
-
-      // otherwise, all rosey permissions granted so start tracking...
-      await watchPositionAsync(
-        {
-          accuracy: Accuracy.BestForNavigation,
-          timeInterval: 1000,
-          distanceInterval: 10
-        },
-        location => {
-          // console.log({ location });
-          addLocation(location);
-        }
-      );
-    } catch (err) {
-      setErrorMessage(err);
-    }
-  };
-
-  useEffect(() => {
-    startTracking();
-  }, []);
+const TrackCreateScreen = ({ isFocused }) => {
+  const {
+    state: { recording },
+    addLocation
+  } = useContext(LocationContext);
+  const callback = useCallback(location => addLocation(location, recording), [
+    recording
+  ]);
+  const [errorMessage] = useLocation(isFocused || recording, callback);
 
   return (
     <Container>
@@ -59,8 +34,10 @@ const TrackCreateScreen = () => {
           ></ErrorMessage>
         </Spacer>
       ) : null}
+
+      <TrackForm></TrackForm>
     </Container>
   );
 };
 
-export default TrackCreateScreen;
+export default withNavigationFocus(TrackCreateScreen);
