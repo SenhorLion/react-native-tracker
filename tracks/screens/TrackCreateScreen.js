@@ -12,6 +12,9 @@ import { ErrorMessage } from "../components/Errors";
 import { TrackForm } from "../components/forms";
 import screenStyles from "./styles";
 
+// TODO: TrackCreateScreen
+// 1. Add Start and endpoint markers on Map tracks
+
 const TrackCreateScreen = ({ isFocused }) => {
   const {
     state: { recording },
@@ -45,7 +48,6 @@ TrackCreateScreen.navigationOptions = () => {
   return {
     title: "Add Track",
     tabBarIcon: <FontAwesome name="plus" size={20}></FontAwesome>
-    // header: null
   };
 };
 

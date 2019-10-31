@@ -7,6 +7,9 @@ import Spacer from "../utils/Spacer";
 import { Container } from "../components/container";
 import screenStyles from "./styles";
 
+// TODO: Account Screen
+// 1. Show user info, name, email etc
+// 2. Show track info, number of tracks etc
 const AccountScreen = ({ navigation }) => {
   const { signout } = useContext(AuthContext);
   return (

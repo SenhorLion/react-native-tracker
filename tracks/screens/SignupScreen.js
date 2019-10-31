@@ -8,6 +8,8 @@ import Spacer from "../utils/Spacer";
 import { NavButton } from "../components/Buttons";
 import { Container } from "../components/container";
 
+// TODO: SignupScreen Screen:
+// 1. Style up to make it look great
 const SignupScreen = ({ navigation }) => {
   const { state, signup, clearErrorMessages } = useContext(AuthContext);
 
