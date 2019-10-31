@@ -7,10 +7,12 @@ import { Context as TrackContext } from "../context/TrackContext";
 import screenStyles from "./styles";
 
 const TrackDetailScreen = ({ navigation }) => {
-  const { state } = useContext(TrackContext);
+  const {
+    state: { tracks }
+  } = useContext(TrackContext);
   const _id = navigation.getParam("_id");
 
-  const track = state.find(t => t._id === _id);
+  const track = tracks.find(t => t._id === _id);
   const initialCoords = track.locations[0].coords;
 
   // TODO: TrackDetail: Show start & end location pointer

@@ -6,7 +6,9 @@ const GET_TRACKS = "GET_TRACKS";
 const trackReducer = (state, action) => {
   switch (action.type) {
     case GET_TRACKS: {
-      return action.payload;
+      return {
+        tracks: [...action.payload]
+      };
     }
     default:
       return state;
@@ -28,5 +30,5 @@ const createTrack = dispatch => async (name, locations) => {
 export const { Provider, Context } = createDataContext(
   trackReducer,
   { getTracks, createTrack },
-  { name: "", tracks: [] }
+  { tracks: [] }
 );
